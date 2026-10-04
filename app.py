@@ -188,14 +188,14 @@ function render(){
   return `<div class="${c}"><div class="box">${v}</div><div class="idx">${k}</div><div class="ptrs">${p}</div></div>`;
  }).join('');
  const v=f.mid===null?null:arr[f.mid];let bg,main,hint;
- if(f.k==='start'){bg='var(--sky)';main=`Let's find ${nb(T)}.`;hint='The list is sorted, so we can skip big parts of it. Press Next to start.';}
- else if(f.k==='pick'){bg='var(--butter)';main=`Look at the middle number: ${nb(v)}`;hint=`Is ${v} the same as ${T}?`;}
- else if(f.k==='right'){bg='var(--lav)';main=`${nb(v)} is smaller than ${nb(T)}`;hint=`So ${T} must be on the right. Cross out the left side.`;}
- else if(f.k==='left'){bg='var(--blush)';main=`${nb(v)} is bigger than ${nb(T)}`;hint=`So ${T} must be on the left. Cross out the right side.`;}
+ if(f.k==='start'){bg='var(--sky)';main=`We want to find ${nb(T)}.`;hint='The numbers are in order, from small to big. Press Next and we will start with the middle number.';}
+ else if(f.k==='pick'){bg='var(--butter)';main=`The middle number is ${nb(v)}.`;hint=`Let's compare it with ${T}.`;}
+ else if(f.k==='right'){bg='var(--lav)';main=`${nb(v)} is smaller than ${nb(T)}.`;hint=`The list goes from small to big, so ${T} must be on the right. We can ignore the left side.`;}
+ else if(f.k==='left'){bg='var(--blush)';main=`${nb(v)} is bigger than ${nb(T)}.`;hint=`The list goes from small to big, so ${T} must be on the left. We can ignore the right side.`;}
  else if(f.k==='found'){bg='var(--mint)';main=`Found it! ${nb(T)} is at position ${f.mid}.`;
   const c=frames.slice(0,i+1).filter(x=>x.k==='pick').length;
-  hint=`It took ${c} check${c===1?'':'s'}. Checking one by one would take ${arr.indexOf(T)+1}.`;}
- else{bg='#F3F0F9';main=`${nb(T)} is not in the list.`;hint='There is nothing left to check.';}
+  hint=`We only looked at ${c} number${c===1?'':'s'}. Looking one by one would take ${arr.indexOf(T)+1}.`;}
+ else{bg='#F3F0F9';main=`${nb(T)} is not in the list.`;hint='We have run out of numbers to check, so it is not here.';}
  $('status').style.background=bg;$('status').innerHTML=`<div class="main">${main}</div><div class="hint">${hint}</div>`;
  $('step').textContent=`Step ${i} of ${LAST}`;
  $('back').disabled=i===0;$('reset').disabled=i===0&&!timer;$('next').disabled=i===LAST;
